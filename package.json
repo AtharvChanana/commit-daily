@@ -1,0 +1,11 @@
+{
+    "name": "commit-daily-bot",
+    "version": "1.0.0",
+    "description": "A bot that commits JavaScript code daily",
+    "main": "commit_bot.js",
+    "scripts": {
+      "start": "node commit_bot.js"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+  }
