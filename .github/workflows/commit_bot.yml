@@ -1,8 +1,9 @@
+#123
 name: Auto Commit Bot
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Runs daily at midnight (UTC)
+    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
 
 jobs:
   commit:
@@ -16,7 +17,16 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Install dependencies
+      run: npm install
+
     - name: Run the commit bot
+      run: node commit_bot.js
+
+    - name: Commit and push changes
       run: |
-        npm install
-        node commit_bot.js
+        git config --global user.name 'YourGitHubUsername'
+        git config --global user.email 'your-email@example.com'
+        git add .
+        git commit -m "Auto commit by bot"
+        git push
