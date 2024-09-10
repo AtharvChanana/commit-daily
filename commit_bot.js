@@ -41,10 +41,20 @@ function makeCommit() {
     }
 }
 
-// Generate random intervals between commits (within 8 hours)
-for (let i = 0; i < numCommits; i++) {
-    const delay = Math.floor(Math.random() * (8 * 60 * 60 * 1000)); // Random delay between 0 and 8 hours
-    setTimeout(() => {
-        makeCommit();
-    }, delay);
+// Function to delay the execution of a promise
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+// Main function to schedule multiple commits
+async function scheduleCommits() {
+    for (let i = 0; i < numCommits; i++) {
+        const delayTime = Math.floor(Math.random() * (8 * 60 * 60 * 1000)); // Random delay between 0 and 8 hours
+        console.log(`Scheduled commit ${i + 1} after ${delayTime / (1000 * 60)} minutes.`);
+        await delay(delayTime); // Wait for the random delay
+        makeCommit(); // Make the commit
+    }
+}
+
+// Run the schedule
+scheduleCommits();
