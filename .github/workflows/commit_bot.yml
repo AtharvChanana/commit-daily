@@ -1,42 +1,28 @@
-name: Auto Commit Bot  # Workflow name
+name: Auto Commit Bot
 
-# Events that trigger this workflow:
 on:
   schedule:
-    - cron: '0 0 * * *'  # Triggers daily at midnight (UTC)
-  workflow_dispatch:  # This allows you to manually trigger the workflow if needed
+    - cron: '0 12 * * *'  # Automatically run daily at 12:00 PM UTC
 
 jobs:
   commit:
-    runs-on: ubuntu-latest  # Runs the job on the latest Ubuntu virtual machine
-    
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository  # Step 1: Checkout your repository
-      uses: actions/checkout@v3  # v3 of the action is used to pull the repository code
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Set up Node.js  # Step 2: Set up Node.js environment
-      uses: actions/setup-node@v3  # Use Node.js version 16
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
         node-version: '16'
-    
-    - name: Install dependencies  # Step 3: Install any necessary npm packages
-      run: npm install  # This will install the dependencies listed in package.json
-      
-    - name: Set Git Identity  # Step 4: Set the Git user identity
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Configure Git user
       run: |
-        git config --global user.name "github-actions[bot]"  # Use GitHub Actions bot as the name
-        git config --global user.email "github-actions@github.com"  # Email associated with the bot
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@example.com"
 
-    - name: Run the commit bot  # Step 5: Run your bot code
-      run: node commit_bot.js  # Executes your bot (e.g., auto-commit logic)
-
-    - name: Commit and push changes  # Step 6: Commit and push the changes
-      run: |
-        git add .  # Add all changes to staging
-        git commit -m "Auto commit by bot"  # Create the commit with a message
-        git push  # Push the commit to the GitHub repository
-
-
-
-
-        
+    - name: Run the commit bot
+      run: node commit_bot.js
