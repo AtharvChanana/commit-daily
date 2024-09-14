@@ -1,28 +1,34 @@
-name: Auto Commit Bot
+name: Commit Bot
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # Automatically run daily at 12:00 PM UTC
+    - cron: '0 16 * * *'
 
 jobs:
   commit:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Configure Git user
-      run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "your-email@example.com"
+      - name: Run commit bot
+        run: node commit_bot.js
 
-    - name: Run the commit bot
-      run: node commit_bot.js
+      - name: Push changes
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Your Name"
+          git add .
+          git commit -m "Auto commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT }}
