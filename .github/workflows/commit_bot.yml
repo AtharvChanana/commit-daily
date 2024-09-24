@@ -21,12 +21,13 @@ jobs:
         run: npm install
 
       - name: Run commit bot
-        run: node commit_bot.js
-
-      - name: Push changes
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "Commit Bot"
+          git config --global user.email "action@github.com"  # For GitHub Actions
+          git config --global user.name "Commit Bot"          # For GitHub Actions
+          # Uncomment below to use personal GitHub settings
+          # git config --global user.email "raaghav5616@gmail.com"
+          # git config --global user.name "Atharv"
+          
           git add .
           git commit -m "Auto commit"
           git push
