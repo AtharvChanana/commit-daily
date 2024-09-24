@@ -24,9 +24,6 @@ jobs:
         run: |
           git config --global user.email "action@github.com"  # For GitHub Actions
           git config --global user.name "Commit Bot"          # For GitHub Actions
-          # Uncomment below to use personal GitHub settings
-          # git config --global user.email "raaghav5616@gmail.com"
-          # git config --global user.name "Atharv"
           
           git add .
           git commit -m "Auto commit"
