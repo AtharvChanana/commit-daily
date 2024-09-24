@@ -4,8 +4,11 @@
     "description": "A bot that commits JavaScript code daily",
     "main": "commit_bot.js",
     "scripts": {
-      "start": "node commit_bot.js"
+        "start": "node commit_bot.js"
     },
     "author": "Your Name",
-    "license": "MIT"
-  }
+    "license": "MIT",
+    "dependencies": {
+        "git": "^0.1.5"
+    }
+}
