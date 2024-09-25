@@ -21,9 +21,8 @@ jobs:
         run: npm install
 
       - name: Run commit bot
-        run: |
-          node commit_bot.js # Run your commit bot script
-          
+        run: node commit_bot.js # Run your commit bot script
+
       - name: Push changes
         run: |
           git config --global user.email "action@github.com"  # GitHub Actions default email
