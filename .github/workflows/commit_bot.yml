@@ -2,7 +2,7 @@ name: Commit Bot
 
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '0 16 * * *'  # Runs daily at 4 PM UTC
 
 jobs:
   commit:
@@ -22,14 +22,14 @@ jobs:
 
       - name: Run commit bot
         run: |
-          git config --global user.email "action@github.com"  # For GitHub Actions
-          git config --global user.name "Commit Bot"          # For GitHub Actions
-          # Uncomment below to use personal GitHub settings
-          # git config --global user.email "raaghav5616@gmail.com"
-          # git config --global user.name "Atharv"
+          node commit_bot.js # Run your commit bot script
           
+      - name: Push changes
+        run: |
+          git config --global user.email "action@github.com"  # GitHub Actions default email
+          git config --global user.name "Commit Bot"          # GitHub Actions default name
           git add .
-          git commit -m "Auto commit"
+          git commit -m "Auto commit - $(date)"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the provided token for authentication
